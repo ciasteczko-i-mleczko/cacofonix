@@ -15,6 +15,8 @@ And after that error just kept growing and growing.
 - https://soundcloud.com/user-223074311/song-20210720-134100
 - https://onlinesequencer.net/2735360
 
+Generated txt files are mostly correct, if a note is invalid it is skipped in midi conversion step. However sometimes saving to midi fails because 
+
 ## Converting midi to txt
 I created a custom class `SongSimplifier` that uses `pretty-midi` library to read midi files and convert them to my custom txt format.
 It reads midi events one by one, categorises them to one of predefined subset of all midi instruments and saves the events sorted by start time to a new file.\
@@ -37,6 +39,8 @@ Resulting music sounds much better when only one instrument is playing at the ti
 - #### Experiment with different model topologies
 - #### Removing STAR and ENDD tokens
 I've added STAR and ENDD tokens hoping it could somehow make the model understand start and end of each song and help grasp general song structure like chorus and verses but it lowered the quality of generated music in general.
+- #### Fixing broken outputs
+Sometimes the model generates invalid lines that cannot be converted to midi events. Currently these lines are skipped, but sometimes they could be fixed. And sometimes the model generates values that `pretty-midi` treats as invalid but they were present in the source files and it breaks saving the resulting midi.
 
 ### Disclaimer
 This code I wrote for myself, for fun, so it might not be the most beautiful python.
