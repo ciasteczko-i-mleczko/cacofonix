@@ -17,7 +17,7 @@ And after that error just kept growing and growing.
 
 ## Converting midi to txt
 I created a custom class `SongSimplifier` that uses `pretty-midi` library to read midi files and convert them to my custom txt format.
-It reads midi events one by one, categorises them to one of predefined subset of all midi instruments.\
+It reads midi events one by one, categorises them to one of predefined subset of all midi instruments and saves the events sorted by start time to a new file.\
 eg: `nAGPI118;96q`
 - `n` - type of event (n - note, r - drum, p - pitch shift)
 - `AGPI` - instrument token (ex. AGPI means acoustic grand piano)
