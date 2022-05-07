@@ -14,8 +14,9 @@ And after that error just kept growing and growing.
 - https://soundcloud.com/user-223074311/song-20210722-105303
 - https://soundcloud.com/user-223074311/song-20210720-134100
 - https://onlinesequencer.net/2735360
+- https://onlinesequencer.net/2754950 - This last one is I think the most interesting, when I let the model generate music for longer time results got better, with repetitions of complex note sequences for multiple bars. Ex. from bar 131.
 
-Generated txt files are mostly correct, if a note is invalid it is skipped in midi conversion step. However sometimes saving to midi fails because 
+Generated txt files are mostly correct, if a note is invalid it is skipped in midi conversion step. However, sometimes saving to midi fails because `pretty-midi` can't handle all input values.
 
 ## Converting midi to txt
 I created a custom class `SongSimplifier` that uses `pretty-midi` library to read midi files and convert them to my custom txt format.
@@ -33,14 +34,14 @@ Example converted file is provided in `sample_data` directory.
 Obviously `SongSimplifier` can also convert this txt representation back to midi.\
 With this simplification some information is lost, all generated notes have the same default velocity, duration can only be one of the predefined values and bpm is set to default but after conversion most of the songs still sound very similar to source midi, just playing a slower or faster.
 
-## How I plan to make this project better
+## How I think I could make this project better
 - #### Get simpler input midi files
-Resulting music sounds much better when only one instrument is playing at the time. Model has trouble with generating polyphonic music, even basic chords. Maybe lowering my expectations and providing simpler midi files could help generate better sounding results.
+Resulting music sounds much better when only one instrument is playing at the time. Model has trouble when a lot of instruments are playing at once. Generating basic chords works rather well. Maybe lowering my expectations and providing simpler midi files could help generate better sounding results.
 - #### Experiment with different model topologies
 - #### Removing STAR and ENDD tokens
-I've added STAR and ENDD tokens hoping it could somehow make the model understand start and end of each song and help grasp general song structure like chorus and verses but it lowered the quality of generated music in general.
+I've added STAR and ENDD tokens hoping it could somehow make the model understand start and end of each song and help grasp general song structure like chorus and verses, but in my opinion it lowered the quality of generated music in general.
 - #### Fixing broken outputs
-Sometimes the model generates invalid lines that cannot be converted to midi events. Currently these lines are skipped, but sometimes they could be fixed. And sometimes the model generates values that `pretty-midi` treats as invalid but they were present in the source files and it breaks saving the resulting midi.
+Sometimes the model generates invalid lines that cannot be converted to midi events. Currently, these lines are skipped, but sometimes they could be fixed. And sometimes the model generates values that `pretty-midi` treats as invalid, but they were present in the source files and it breaks saving the resulting midi.
 
 ### Disclaimer
 This code I wrote for myself, for fun, so it might not be the most beautiful python.

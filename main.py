@@ -10,7 +10,7 @@ import numpy as np
 from tqdm import tqdm
 
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM, Embedding, Dropout, InputLayer
+from tensorflow.keras.layers import Dense, LSTM, Dropout
 from tensorflow.keras.optimizers import RMSprop, Adam
 
 logging.basicConfig(
